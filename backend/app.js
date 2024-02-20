@@ -24,7 +24,8 @@ const corsOptions = {
   origin: 'http://localhost:3000',  // replace with your frontend server address
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
-  optionsSuccessStatus: 204,
+  //optionsSuccessStatus: 204,
+  optionsSuccessStatus: 200,
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 app.use(cors(corsOptions));

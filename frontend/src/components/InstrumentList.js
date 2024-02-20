@@ -208,29 +208,6 @@ const InstrumentList = () => {
     setSelectedCategory(null); // Assuming you have a state variable 'selectedCategory'
   };
 
-  // const renderCategoryButtons = () => {
-  //   const categories = [...new Set(instruments.map(instr => instr.type))];
-  //   return (
-  //     <>
-  //       <button
-  //         onClick={handleAllCategories}
-  //         className="category-button"
-  //       >
-  //         All Categories
-  //       </button>
-  //       {categories.map(category => (
-  //         <button
-  //           key={category}
-  //           onClick={() => handleCategorySelect(category)}
-  //           className="category-button"
-  //         >
-  //           {category}
-  //         </button>
-  //       ))}
-  //     </>
-  //   );
-  // };
-
   const renderCategoryButtons = () => {
     const categories = [...new Set(instruments.map(instr => instr.type))];
     return (
@@ -253,38 +230,6 @@ const InstrumentList = () => {
       </>
     );
   };
-
-
-  // const sortInstruments = (instrumentsToSort) => {
-  //   return [...instrumentsToSort].sort((a, b) => {
-  //     if (!user) {
-  //       return 0;
-  //     }
-
-  //     const aIsBookedByUser = a.bookedBy && a.bookedBy._id === user.id;
-  //     const bIsBookedByUser = b.bookedBy && b.bookedBy._id === user.id;
-  //     const aIsBooked = !!a.bookedBy;
-  //     const bIsBooked = !!b.bookedBy;
-
-  //     if (aIsBookedByUser && !bIsBookedByUser) {
-  //       return -1;
-  //     }
-
-  //     if (!aIsBookedByUser && bIsBookedByUser) {
-  //       return 1;
-  //     }
-
-  //     if (aIsBooked && !bIsBooked) {
-  //       return -1;
-  //     }
-
-  //     if (!aIsBooked && bIsBooked) {
-  //       return 1;
-  //     }
-
-  //     return 0;
-  //   });
-  // };
 
   //const sortInstruments = (instrumentsToSort, user, pendingReleaseInstruments) => {
   const sortInstruments = (instrumentsToSort) => {

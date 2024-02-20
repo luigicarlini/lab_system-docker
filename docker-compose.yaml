@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  frontend:
+    image: crills/booking_system_frontend:latest
+    build: 
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    image: crills/booking_system_backend:latest
+    build: 
+      context: ./backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/mydb
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db # Persists MongoDB data between container restarts.
+      - ./backend/mongo-init-scripts:/docker-entrypoint-initdb.d # Scripts in this directory are executed at container startup
+      - ./mongo-backup:/backup # Maps your local ./mongo-backup directory to /backup inside the container, where your init-mongo.sh script expects to find the backup data.
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.runCommand('ping').ok"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  mongo_data:
