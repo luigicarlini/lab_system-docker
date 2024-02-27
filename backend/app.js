@@ -14,6 +14,8 @@ const passportJWT = require(path.join(__dirname, 'config', 'passport'));
 // Initialize the Express app
 const app = express();
 
+
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB Connected'))
@@ -21,7 +23,8 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
 // Middleware for CORS, JSON parsing
 const corsOptions = {
-  origin: 'http://localhost:3000',  // replace with your frontend server address
+  //origin: 'http://localhost:3000',  // replace with your frontend server address
+  origin: '*',  // Allows requests from any origin
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   //optionsSuccessStatus: 204,
@@ -55,8 +58,10 @@ const userRoutes = require(path.join(__dirname, 'routes', 'users'));
 //const userRoutes = require('./routes/users');
 //const bookingRoutes = require('./routes/bookings');
 
-app.use('/api/instruments', instrumentRoutes);  // ? ==> change to app.use('/api/instruments', instrumentRoutes);
-app.use('/api/users', userRoutes);
+//app.use('/api/instruments', instrumentRoutes);  // ? ==> change to app.use('/api/instruments', instrumentRoutes);
+//app.use('/api/users', userRoutes);
+app.use('/instruments', instrumentRoutes);  // ? ==> change to app.use('/api/instruments', instrumentRoutes);
+app.use('/users', userRoutes);
 //app.use('/api/bookings', bookingRoutes);
 
 // Error handling middleware
@@ -65,6 +70,7 @@ app.use((err, req, res, next) => {
 });
 
 // Existing Code: Server Listen
+// Explicitly specify the host as '0.0.0.0'
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

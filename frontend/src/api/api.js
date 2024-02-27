@@ -7,7 +7,8 @@ const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const getAllInstruments = async () => {
   console.log("getAllInstruments: Attempting to get all instrument");
-  const response = await axios.get(`${BASE_URL}/api/instruments`);
+  //const response = await axios.get(`${BASE_URL}/api/instruments`);
+  const response = await axios.get(`${BASE_URL}/instruments`);
   return response.data;
 };
 
@@ -27,7 +28,9 @@ export const bookInstrument = async (id, userid, bookingData) => {
       bookedUntil: bookingData.bookedUntil,
       location: bookingData.location  // <-- Added the new location attribute
     });
-      const response = await axios.post(`${BASE_URL}/api/instruments/book/${id}`, {
+      //const response = await axios.post(`${BASE_URL}/api/instruments/book/${id}`, {
+      const response = await axios.post(`${BASE_URL}/instruments/book/${id}`, {
+
         userid: userid,
         bookedBy: bookingData.bookedBy,
         bookedFrom: bookingData.bookedFrom,
@@ -49,7 +52,9 @@ export const releaseInstrument = async (userid, id) => {
       userid: userid,
       id: id
      });
-      const response = await axios.post(`${BASE_URL}/api/instruments/release/${id}`, {
+      //const response = await axios.post(`${BASE_URL}/api/instruments/release/${id}`, {
+      const response = await axios.post(`${BASE_URL}/instruments/release/${id}`, {
+
         userid: userid,
         id: id
       });
@@ -64,14 +69,16 @@ export const releaseInstrument = async (userid, id) => {
 
 export const getInstrumentStatus = async (id) => {
   console.log("getInstrumentStatus: Attempting to get all instrument");
-  const response = await axios.get(`${BASE_URL}/api/instruments/${id}`);
+  //const response = await axios.get(`${BASE_URL}/api/instruments/${id}`);
+  const response = await axios.get(`${BASE_URL}/instruments/${id}`);
   return response.data;
 };
 
 export const markInstrumentAsReturning = async (id, isReturning = true, location, locationRoom) => {
   console.log(`markInstrumentAsReturning: Attempting to set returning status for instrument with ID: ${id} to ${isReturning} and to ${location} and to ${locationRoom}`);
   try {
-      const response = await axios.post(`${BASE_URL}/api/instruments/returning/${id}`, { returning: isReturning, location: location, locationRoom: locationRoom});
+      //const response = await axios.post(`${BASE_URL}/api/instruments/returning/${id}`, { returning: isReturning, location: location, locationRoom: locationRoom});
+      const response = await axios.post(`${BASE_URL}/instruments/returning/${id}`, { returning: isReturning, location: location, locationRoom: locationRoom});
       return response.data;
   } catch (error) {
       console.error("Error during marking instrument as returning:", error);
@@ -82,7 +89,8 @@ export const markInstrumentAsReturning = async (id, isReturning = true, location
 export const markInstrumentAsWaiting = async (id, isWaiting = true, location, locationRoom) => {
   console.log(`markInstrumentAsWaiting: Attempting to set waiting status for instrument with ID: ${id} to ${isWaiting} to ${location} and to ${locationRoom}`);
   try {
-      const response = await axios.post(`${BASE_URL}/api/instruments/waiting/${id}`, { waiting: isWaiting, location: location, locationRoom: locationRoom});
+      //const response = await axios.post(`${BASE_URL}/api/instruments/waiting/${id}`, { waiting: isWaiting, location: location, locationRoom: locationRoom});
+      const response = await axios.post(`${BASE_URL}/instruments/waiting/${id}`, { waiting: isWaiting, location: location, locationRoom: locationRoom});
       return response.data;
   } catch (error) {
       console.error("Error during marking user as waiting:", error);
@@ -93,7 +101,8 @@ export const markInstrumentAsWaiting = async (id, isWaiting = true, location, lo
 export const markInstrumentAsWaitingBook = async (id, isWaiting = true) => {
   console.log(`markInstrumentAsWaiting: Attempting to set waiting status for instrument with ID: ${id} to ${isWaiting}`);
   try {
-      const response = await axios.post(`${BASE_URL}/api/instruments/waitingbook/${id}`, { waiting: isWaiting });
+      //const response = await axios.post(`${BASE_URL}/api/instruments/waitingbook/${id}`, { waiting: isWaiting });
+      const response = await axios.post(`${BASE_URL}/instruments/waitingbook/${id}`, { waiting: isWaiting });
       return response.data;
   } catch (error) {
       console.error("Error during marking user as waiting:", error);
@@ -104,7 +113,8 @@ export const markInstrumentAsWaitingBook = async (id, isWaiting = true) => {
 export const markInstrumentAsReleased = async (id, isReleasing = false, location, locationRoom) => {
   console.log(`markInstrumentAsReleased: Attempting to set releasing status for instrument with ID: ${id} to ${isReleasing} and to ${location} and to ${locationRoom}`);
   try {
-      const response = await axios.post(`${BASE_URL}/api/instruments/releasing/${id}`, { releasing: isReleasing, location: location, locationRoom: locationRoom});
+      //const response = await axios.post(`${BASE_URL}/api/instruments/releasing/${id}`, { releasing: isReleasing, location: location, locationRoom: locationRoom});
+      const response = await axios.post(`${BASE_URL}/instruments/releasing/${id}`, { releasing: isReleasing, location: location, locationRoom: locationRoom});
       return response.data;
   } catch (error) {
       console.error("Error during marking user as releasing:", error);
@@ -115,7 +125,8 @@ export const markInstrumentAsReleased = async (id, isReleasing = false, location
 export const markInstrumentAsCancelBooking = async (id, isWaiting = false, isReturning = false) => {
   console.log(`markInstrumentAsCancelBooking: Attempting to set waiting status for instrument with ID: ${id} to isWaiting= ${isWaiting} and isReturning= ${isReturning}`);
   try {
-      const response = await axios.post(`${BASE_URL}/api/instruments/cancel/${id}`, { waiting: isWaiting, returning: isReturning });
+      //const response = await axios.post(`${BASE_URL}/api/instruments/cancel/${id}`, { waiting: isWaiting, returning: isReturning });
+      const response = await axios.post(`${BASE_URL}/instruments/cancel/${id}`, { waiting: isWaiting, returning: isReturning });
       return response.data;
   } catch (error) {
       console.error("Error during marking user as canceling:", error);
@@ -126,7 +137,8 @@ export const markInstrumentAsCancelBooking = async (id, isWaiting = false, isRet
 export const markInstrumentAsRejected = async (id, isRejecting = true) => {
   console.log(`markInstrumentAsRejecting: Attempting to set waiting status for instrument with ID: ${id} to isRejecting= ${isRejecting}`);
   try {
-      const response = await axios.post(`${BASE_URL}/api/instruments/reject/${id}`, { rejecting: isRejecting });
+      //const response = await axios.post(`${BASE_URL}/api/instruments/reject/${id}`, { rejecting: isRejecting });
+      const response = await axios.post(`${BASE_URL}/instruments/reject/${id}`, { rejecting: isRejecting });
       return response.data;
   } catch (error) {
       console.error("Error during marking user as rejecting:", error);
@@ -137,7 +149,8 @@ export const markInstrumentAsRejected = async (id, isRejecting = true) => {
 export const markInstrumentRejectApproval = async (id, isRejectingApproval = true) => {
   console.log(`markInstrumentRejectingApproval: Attempting to set rejectingapproval status for instrument with ID: ${id} to isRejectingApproval= ${isRejectingApproval}`);
   try {
-      const response = await axios.post(`${BASE_URL}/api/instruments/rejectapproval/${id}`, { rejectingapproval: isRejectingApproval });
+      //const response = await axios.post(`${BASE_URL}/api/instruments/rejectapproval/${id}`, { rejectingapproval: isRejectingApproval });
+      const response = await axios.post(`${BASE_URL}/instruments/rejectapproval/${id}`, { rejectingapproval: isRejectingApproval });
       return response.data;
   } catch (error) {
       console.error("Error during marking user as rejectingApproval:", error);

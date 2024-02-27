@@ -43,7 +43,8 @@ export const LogoutProvider = ({ children }) => {
     try {
       //const token = localStorage.getItem('token');  // get token from localStorage
       console.log("Token to be sent:", token);
-      const response = await axios.post(`${BASE_URL}/api/users/logout`, null, {
+      //const response = await axios.post(`${BASE_URL}/api/users/logout`, null, {
+      const response = await axios.post(`${BASE_URL}/users/logout`, null, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

@@ -31,7 +31,8 @@ const Login = () => {
     try {
       // Real API call to validate user login
       //C:\lab-booking-system-master\lab-booking-system-master\backend\routes
-      const response = await axios.post(`${BASE_URL}/api/users/login`, {
+      //const response = await axios.post(`${BASE_URL}/api/users/login`, {
+      const response = await axios.post(`${BASE_URL}/users/login`, {
         username: username,
         password: password,
       });

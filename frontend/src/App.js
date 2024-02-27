@@ -23,8 +23,10 @@ const App = () => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         try {
           const BASE_URL = process.env.REACT_APP_BACKEND_URL;
-          console.log("App.js: sending request to:", `${BASE_URL}/api/users/current`);
-          const response = await axios.get(`${BASE_URL}/api/users/current`);
+          //console.log("App.js: sending request to:", `${BASE_URL}/api/users/current`);
+          console.log("App.js: sending request to:", `${BASE_URL}/users/current`);
+          //const response = await axios.get(`${BASE_URL}/api/users/current`);
+          const response = await axios.get(`${BASE_URL}/users/current`);
           console.log("App.js: response from server:", response);
           
           if (response.data) {

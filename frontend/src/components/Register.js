@@ -17,7 +17,9 @@ const Register = () => {
     e.preventDefault();
     try {
       // Make an API call to register
-      const response = await axios.post(`${BASE_URL}/api/users/register`, {
+      //const response = await axios.post(`${BASE_URL}/api/users/register`, {
+      const response = await axios.post(`${BASE_URL}/users/register`, {
+
         username,
         password,
         //email,
